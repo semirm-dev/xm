@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package companies;
+
+import "google/protobuf/empty.proto";
+
+service Companies {
+  rpc AddCompany(AddCompanyRequest) returns(CompanyResponse) {};
+  rpc ModifyCompany(ModifyCompanyRequest) returns(CompanyResponse) {};
+  rpc DeleteCompany(DeleteCompanyRequest) returns(google.protobuf.Empty) {};
+  rpc FindCompanyByID(FindCompanyByIDRequest) returns(CompanyResponse) {};
+}
+
+enum CompanyType {
+  Corporations = 0;
+  NonProfit = 1;
+  Cooperative = 2;
+  SoleProprietorship = 3;
+}
+
+message AddCompanyRequest {
+  string name = 1;
+  string description = 2;
+  uint32 employees_num = 3;
+  bool registered = 4;
+  CompanyType company_type = 5;
+}
+
+message ModifyCompanyRequest {
+  string id = 1;
+  string description = 2;
+  uint32 employees_num = 3;
+  bool registered = 4;
+  CompanyType company_type = 5;
+}
+
+message DeleteCompanyRequest {
+  string id = 1;
+}
+
+message FindCompanyByIDRequest {
+  string id = 1;
+}
+
+message CompanyResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  uint32 employees_num = 4;
+  bool registered = 5;
+  CompanyType company_type = 6;
+}
+
